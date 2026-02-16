@@ -1,5 +1,10 @@
-import Hero from './components/Hero'
-import Navbar from './components/Navbar'
+import Navbar from './components/layout/Navbar'
+import Hero from './sections/Hero'
+import InsideLoopSection from './sections/InsideLoopSection'
+import OurWork from './sections/OurWork'
+import OurServices from './sections/OurServices'
+import Testimonials from './sections/Testimonials'
+import Faqs from './sections/Faqs'
 
 function App() {
   return (
@@ -8,6 +13,11 @@ function App() {
         <Navbar />
       </div>
       <Hero />
+      <InsideLoopSection />
+      <OurServices />
+      <OurWork />
+      <Testimonials />
+      <Faqs />
     </main>
   )
 }

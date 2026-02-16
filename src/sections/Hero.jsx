@@ -15,7 +15,7 @@ function Hero() {
             </span>
           </h1>
 
-          <p className="mt-6 w-full max-w-[270px] text-[18px] leading-[1.35] tracking-[-0.01em] text-white/85 md:absolute md:right-[5%] md:top-[56%] md:mt-0 md:text-[32px] md:leading-[1.15]">
+          <p className="mt-10 w-full max-w-[320px] text-[14px] leading-[1.4] tracking-[-0.01em] text-white/85 md:absolute md:right-[5%] md:top-[60%] md:mt-0 md:text-[18px] md:leading-[1.3]">
             The first full-stack Web3 creative agency integrating AI technology to deliver best-in-class client
             experience.
           </p>
