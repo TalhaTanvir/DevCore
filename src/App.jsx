@@ -5,6 +5,8 @@ import OurWork from './sections/OurWork'
 import OurServices from './sections/OurServices'
 import Testimonials from './sections/Testimonials'
 import Faqs from './sections/Faqs'
+import ContactUs from './sections/ContactUs'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
       <OurWork />
       <Testimonials />
       <Faqs />
+      <ContactUs />
+      <Footer />
     </main>
   )
 }
