@@ -1,3 +1,5 @@
+import loopWhiteImage from '../assets/images/Loop-White.png'
+
 function InsideLoopSection() {
   return (
     <section className="bg-[#efefef] px-5 py-20 text-[#111111] md:px-10 md:py-28">
@@ -32,6 +34,14 @@ function InsideLoopSection() {
               </p>
             </article>
           </div>
+        </div>
+
+        <div className="mt-16 overflow-hidden rounded-2xl px-4 py-8 md:mt-20 md:px-10 md:py-12">
+          <img
+            src={loopWhiteImage}
+            alt="Loop white"
+            className="mx-auto h-auto w-full max-w-[900px] object-contain"
+          />
         </div>
       </div>
     </section>

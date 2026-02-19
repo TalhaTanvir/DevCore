@@ -1,19 +1,15 @@
-import Navbar from './components/layout/Navbar'
-import Hero from './sections/Hero'
-import InsideLoopSection from './sections/InsideLoopSection'
-import OurWork from './sections/OurWork'
-import OurServices from './sections/OurServices'
-import Testimonials from './sections/Testimonials'
-import Faqs from './sections/Faqs'
-import ContactUs from './sections/ContactUs'
-import Footer from './components/Footer'
+import MainLayout from './layouts/MainLayout'
+import Hero from './components/sections/Hero'
+import InsideLoopSection from './components/sections/InsideLoopSection'
+import OurWork from './components/sections/OurWork'
+import OurServices from './components/sections/OurServices'
+import Testimonials from './components/sections/Testimonials'
+import Faqs from './components/sections/Faqs'
+import ContactUs from './components/sections/ContactUs'
 
 function App() {
   return (
-    <main className="relative min-h-screen bg-[#141414]">
-      <div className="absolute left-0 right-0 top-0 z-20 px-5 py-6 md:px-10">
-        <Navbar />
-      </div>
+    <MainLayout>
       <Hero />
       <InsideLoopSection />
       <OurServices />
@@ -21,8 +17,7 @@ function App() {
       <Testimonials />
       <Faqs />
       <ContactUs />
-      <Footer />
-    </main>
+    </MainLayout>
   )
 }
 
