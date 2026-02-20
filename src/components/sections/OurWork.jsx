@@ -42,19 +42,22 @@ const domainCards = [
 
 function OurWork() {
   return (
-    <section id="our-work" className="relative z-10 block bg-[#efefef] px-5 py-20 text-[#0d1022] md:px-10 md:py-28">
-      <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center">
-        <div className="relative w-full max-w-[980px] pt-14 md:pt-16">
+    <section
+      id="portfolio"
+      className="scroll-mt-24 relative z-10 block bg-[#efefef] px-5 py-20 text-[#0d1022] md:px-10 md:py-28"
+    >
+      <div className="mx-auto flex w-full max-w-7xl flex-col items-center">
+        <div className="relative w-full max-w-5xl pt-14 md:pt-16">
           {workTags.map((tag) => (
             <span
               key={tag.label}
-              className={`absolute rounded-full border border-[#1a2138]/45 bg-[#f6f5f6] px-5 py-2 text-[clamp(1rem,1.45vw,2rem)] leading-none tracking-[-0.02em] text-[#141b35] ${tag.className}`}
+              className={`absolute rounded-full border border-[#1a2138]/45 bg-[#f6f5f6] px-5 py-2 text-base leading-none tracking-[-0.02em] text-[#141b35] md:text-2xl ${tag.className}`}
             >
               {tag.label}
             </span>
           ))}
 
-          <h2 className="mx-auto max-w-[920px] text-center text-[clamp(2.2rem,5.8vw,5.2rem)] leading-[1.03] tracking-[-0.04em]">
+          <h2 className="mx-auto max-w-5xl text-center text-4xl leading-[1.03] tracking-[-0.04em] md:text-6xl lg:text-7xl">
             Products Designed to Learn and
             <br />
             Scale Intelligently
@@ -62,13 +65,13 @@ function OurWork() {
           </h2>
         </div>
 
-        <p className="mt-10 max-w-[700px] text-center text-[clamp(0.98rem,1.2vw,1.35rem)] leading-[1.6] text-[#1d2238]/75">
+        <p className="mt-10 max-w-2xl text-center text-base leading-[1.6] text-[#1d2238]/75 md:text-lg">
           We build AI-powered systems through design, development, and CMS evolving with your vision to scale
           intelligently and create lasting impact.
         </p>
 
         <div className="mt-16 w-full">
-          <h3 className="text-[clamp(2rem,4.2vw,3.8rem)] leading-[1.06] tracking-[-0.04em]">
+          <h3 className="text-4xl leading-[1.06] tracking-[-0.04em] md:text-6xl">
             Domains We Help Evolve<span className="text-[#f18f3a]">.</span>
           </h3>
 
@@ -84,10 +87,10 @@ function OurWork() {
 
                   {card.title ? (
                     <div className="absolute inset-x-0 bottom-16 px-5 md:px-6">
-                      <h4 className="text-[clamp(2rem,3.3vw,3rem)] leading-[1.02] tracking-[-0.03em] text-white">
+                      <h4 className="text-3xl leading-[1.02] tracking-[-0.03em] text-white md:text-5xl">
                         {card.title}
                       </h4>
-                      <p className="mt-3 max-w-[38ch] text-sm leading-[1.4] text-white/85 md:text-base">
+                      <p className="mt-3 max-w-xl text-sm leading-[1.4] text-white/85 md:text-base">
                         {card.description}
                       </p>
                     </div>
@@ -95,10 +98,10 @@ function OurWork() {
 
                   <button
                     type="button"
-                    className="absolute bottom-3 left-3 right-3 inline-flex h-11 items-center justify-between rounded-full bg-white px-5 text-[1.65rem] leading-none text-[#151a2e] md:bottom-4 md:left-4 md:right-4 md:h-12"
+                    className="absolute bottom-3 left-3 right-3 inline-flex h-11 items-center justify-between rounded-full bg-white px-5 text-[26px] leading-none text-[#151a2e] md:bottom-4 md:left-4 md:right-4 md:h-12"
                   >
-                    <span className="text-[1.5rem] tracking-[-0.02em]">Explore</span>
-                    <span className="text-[1.9rem]">&rarr;</span>
+                    <span className="text-2xl tracking-[-0.02em]">Explore</span>
+                    <span className="text-3xl">&rarr;</span>
                   </button>
                 </article>
               ))}

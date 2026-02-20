@@ -1,6 +1,6 @@
 import MainLayout from './layouts/MainLayout'
 import Hero from './components/sections/Hero'
-import InsideLoopSection from './components/sections/InsideLoopSection'
+import OurProcess from './components/sections/OurProcess'
 import OurWork from './components/sections/OurWork'
 import OurServices from './components/sections/OurServices'
 import Testimonials from './components/sections/Testimonials'
@@ -11,7 +11,7 @@ function App() {
   return (
     <MainLayout>
       <Hero />
-      <InsideLoopSection />
+      <OurProcess />
       <OurServices />
       <OurWork />
       <Testimonials />

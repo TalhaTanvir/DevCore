@@ -14,22 +14,22 @@ const socialLinks = [
 function Footer() {
   return (
     <footer className="bg-[#020511] px-5 pb-10 pt-16 text-white md:px-10 md:pb-12">
-      <div className="mx-auto grid w-full max-w-[1312px] gap-12 md:grid-cols-[1.2fr_0.95fr_0.95fr_1.15fr] md:gap-8">
+      <div className="mx-auto grid w-full max-w-7xl gap-12 md:grid-cols-[1.2fr_0.95fr_0.95fr_1.15fr] md:gap-8">
         <div className="space-y-9">
           <div className="space-y-2">
             <a
               href="mailto:contact@66loop.com"
-              className="inline-flex items-center gap-2 border-b border-white/70 pb-1 text-[clamp(1.6rem,2.5vw,2rem)] leading-none tracking-[-0.02em] transition-opacity hover:opacity-80"
+              className="inline-flex items-center gap-2 border-b border-white/70 pb-1 text-2xl leading-none tracking-[-0.02em] transition-opacity hover:opacity-80 md:text-3xl"
             >
               contact@66loop.com
               <FiCopy className="text-base" aria-hidden="true" />
             </a>
-            <a href="tel:+44020801238779" className="block text-[clamp(1.1rem,1.6vw,1.5rem)] text-white/90 hover:opacity-80">
+            <a href="tel:+44020801238779" className="block text-lg text-white/90 hover:opacity-80 md:text-xl">
               +44 0208 123 8779
             </a>
           </div>
 
-          <div className="space-y-1 text-[clamp(1.05rem,1.25vw,1.32rem)] text-white/90">
+          <div className="space-y-1 text-base text-white/90 md:text-lg">
             <p className="mb-2 inline-flex items-center gap-2">
               <FiMapPin aria-hidden="true" /> Florida, USA
             </p>
@@ -39,7 +39,7 @@ function Footer() {
         </div>
 
         <nav>
-          <ul className="space-y-2 text-[clamp(1.05rem,1.2vw,1.35rem)] text-white/92">
+          <ul className="space-y-2 text-base text-white/92 md:text-lg">
             {navLinks.map((item) => (
               <li key={item}>
                 <a href="#" className="transition-opacity hover:opacity-75">
@@ -51,7 +51,7 @@ function Footer() {
         </nav>
 
         <div>
-          <ul className="space-y-2 text-[clamp(1.05rem,1.2vw,1.35rem)] text-white/92">
+          <ul className="space-y-2 text-base text-white/92 md:text-lg">
             {serviceLinks.map((item) => (
               <li key={item}>
                 <a href="#" className="transition-opacity hover:opacity-75">
@@ -91,36 +91,17 @@ function Footer() {
                     className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white text-[#0c1020] transition-transform hover:-translate-y-0.5"
                     aria-label={item.label}
                   >
-                    <item.icon className="text-[0.92rem]" aria-hidden="true" />
+                    <item.icon className="text-sm" aria-hidden="true" />
                   </a>
                 </li>
               ))}
             </ul>
           </div>
-
-          <div className="flex justify-end md:pr-4">
-            <svg viewBox="0 0 300 150" className="h-[95px] w-[210px]" aria-label="66loop logo">
-              <defs>
-                <linearGradient id="loopGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#2f62ff" />
-                  <stop offset="45%" stopColor="#9c7dff" />
-                  <stop offset="100%" stopColor="#ebf1ff" />
-                </linearGradient>
-              </defs>
-              <path
-                d="M35 75c0-24 20-44 44-44 18 0 27 10 40 20 13 10 22 20 40 20 24 0 44-20 44-44M265 75c0 24-20 44-44 44-18 0-27-10-40-20-13-10-22-20-40-20-24 0-44 20-44 44"
-                fill="none"
-                stroke="url(#loopGradient)"
-                strokeWidth="18"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
         </div>
       </div>
 
-      <div className="mx-auto mt-16 flex w-full max-w-[1312px] flex-col gap-4 text-sm text-white/65 md:mt-12 md:flex-row md:items-center md:justify-between">
-        <p>&copy; 2025 66Loop Technologies. All rights reserved.</p>
+      <div className="mx-auto mt-16 flex w-full max-w-7xl flex-col gap-4 text-sm text-white/65 md:mt-12 md:flex-row md:items-center md:justify-between">
+        <p>&copy; 2025 DevCore Technologies. All rights reserved.</p>
         <div className="flex items-center gap-5">
           <a href="#" className="underline-offset-2 transition-opacity hover:opacity-75 hover:underline">
             Privacy Policy

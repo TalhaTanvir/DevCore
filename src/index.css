@@ -8,23 +8,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
-.hero-noise::before {
-  content: '';
-  position: absolute;
-  inset: -10%;
-  background:
-    radial-gradient(circle at 50% -12%, rgba(255, 255, 255, 0.2), transparent 45%),
-    radial-gradient(circle at 52% 100%, rgba(255, 255, 255, 0.13), transparent 46%);
-  pointer-events: none;
-  opacity: 0.95;
+html {
+  scroll-behavior: smooth;
 }
 
 .hero-rotate {
@@ -67,4 +52,35 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+.testimonial-swiper .swiper-slide {
+  height: auto;
+  opacity: 0.45;
+  transform: scale(0.98);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.testimonial-swiper .swiper-slide-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.testimonials-pagination .swiper-pagination-bullet {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 1;
+  margin: 0 3px !important;
+  transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.testimonials-pagination .swiper-pagination-bullet-active {
+  width: 34px;
+  background: #ffffff;
+}
+
+.testimonial-swiper {
+  padding-bottom: 12px;
 }
