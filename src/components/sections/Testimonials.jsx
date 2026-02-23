@@ -33,7 +33,7 @@ function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="scroll-mt-24 relative overflow-hidden bg-[#0a0c12] px-5 py-20 text-white md:px-10 md:py-28"
+      className="scroll-mt-24 relative overflow-hidden bg-[var(--bg-dark)] px-5 py-20 text-white md:px-10 md:py-28"
     >
       <div className="mx-auto w-full max-w-7xl">
         <div className="relative">

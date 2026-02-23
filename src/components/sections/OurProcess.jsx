@@ -2,7 +2,7 @@ import loopWhiteImage from '../../assets/images/Loop-White.png'
 
 function OurProcess() {
   return (
-    <section className="bg-[#efefef] px-5 py-20 text-[#111111] md:px-10 md:py-28">
+    <section className="bg-[var(--bg-light)] px-5 py-20 text-[#111111] md:px-10 md:py-28">
       <div className="mx-auto w-full max-w-7xl">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <p className="max-w-5xl text-3xl leading-[1.08] tracking-[-0.03em] md:text-5xl">

@@ -87,7 +87,7 @@ function OurServices() {
   return (
     <section
       id="services"
-      className="scroll-mt-24 bg-[#141414] px-5 pb-16 pt-12 text-white md:px-10 md:pb-20 md:pt-16"
+      className="scroll-mt-24 bg-[var(--bg-dark)] px-5 pb-16 pt-12 text-white md:px-10 md:pb-20 md:pt-16"
     >
       <div className="mx-auto w-full max-w-7xl overflow-hidden">
         <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">

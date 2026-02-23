@@ -13,7 +13,7 @@ const socialLinks = [
 
 function Footer() {
   return (
-    <footer className="bg-[#020511] px-5 pb-10 pt-16 text-white md:px-10 md:pb-12">
+    <footer className="bg-[var(--bg-dark)] px-5 pb-10 pt-16 text-white md:px-10 md:pb-12">
       <div className="mx-auto grid w-full max-w-7xl gap-12 md:grid-cols-[1.2fr_0.95fr_0.95fr_1.15fr] md:gap-8">
         <div className="space-y-9">
           <div className="space-y-2">
