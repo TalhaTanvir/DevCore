@@ -1,10 +1,11 @@
-import React, { useRef } from "react"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Navigation } from "swiper/modules"
+import React, { useState } from "react"
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation, Pagination } from "swiper/modules"
 
 import "swiper/css"
 import "swiper/css/navigation"
+import "swiper/css/pagination"
 
 const services = [
   {
@@ -81,8 +82,24 @@ function ServiceIllustration({ icon }) {
 }
 
 function OurServices() {
-  const prevRef = useRef(null)
-  const nextRef = useRef(null)
+  const [sliderState, setSliderState] = useState({
+    isBeginning: true,
+    isEnd: false,
+    snapIndex: 0,
+    totalSteps: 1,
+  })
+
+  const syncSliderState = (swiper) => {
+    const totalSteps = Math.max(swiper?.snapGrid?.length || 1, 1)
+    const snapIndex = Math.min(swiper?.snapIndex || 0, totalSteps - 1)
+
+    setSliderState({
+      isBeginning: !!swiper?.isBeginning,
+      isEnd: !!swiper?.isEnd,
+      snapIndex,
+      totalSteps,
+    })
+  }
 
   return (
     <section
@@ -95,50 +112,27 @@ function OurServices() {
             <span className="block text-5xl font-light text-white/85 md:text-7xl">
               We are
             </span>
-            <span
-              className="block text-5xl font-light md:text-7xl"
-              style={{ fontFamily: "Times New Roman, serif" }}
-            >
+            <span className="block text-5xl font-light md:text-7xl">
               expert at
             </span>
           </h2>
 
-          <div className="flex items-center gap-3">
-            {/* React Icons arrows */}
-            <button
-              ref={prevRef}
-              type="button"
-              aria-label="Previous"
-              className="grid h-12 w-12 place-items-center rounded-full border border-white/55 bg-white/20 text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12)] backdrop-blur transition hover:border-white hover:bg-white/30"
-            >
-              <FiArrowLeft size={20} className="text-white" />
-            </button>
-            <button
-              ref={nextRef}
-              type="button"
-              aria-label="Next"
-              className="grid h-12 w-12 place-items-center rounded-full border border-white/55 bg-white/20 text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12)] backdrop-blur transition hover:border-white hover:bg-white/30"
-            >
-              <FiArrowRight size={20} className="text-white" />
-            </button>
-          </div>
         </div>
 
         <div className="mt-10 md:mt-14">
           <Swiper
-            modules={[Navigation]}
+            modules={[Navigation, Pagination]}
             spaceBetween={18}
             slidesPerView={1.1}
             speed={550}
             grabCursor
             navigation={{
-              prevEl: prevRef.current,
-              nextEl: nextRef.current,
+              prevEl: ".ourservices-prev",
+              nextEl: ".ourservices-next",
             }}
-            onBeforeInit={(swiper) => {
-              // attach refs correctly (important when using custom buttons)
-              swiper.params.navigation.prevEl = prevRef.current
-              swiper.params.navigation.nextEl = nextRef.current
+            pagination={{
+              el: ".ourservices-pagination",
+              clickable: true,
             }}
             breakpoints={{
               520: { slidesPerView: 1.3, spaceBetween: 18 },
@@ -146,6 +140,10 @@ function OurServices() {
               1024: { slidesPerView: 3.05, spaceBetween: 22 },
               1280: { slidesPerView: 3.6, spaceBetween: 24 },
             }}
+            onSwiper={syncSliderState}
+            onSlideChange={syncSliderState}
+            onBreakpoint={syncSliderState}
+            onResize={syncSliderState}
           >
             {services.map((service) => (
               <SwiperSlide key={service.title} className="pb-2">
@@ -170,6 +168,37 @@ function OurServices() {
               </SwiperSlide>
             ))}
           </Swiper>
+
+          <div className="mt-6 flex items-center justify-between gap-4">
+            <div className="flex items-center">
+              <div className="ourservices-pagination flex items-center gap-4 [&_.swiper-pagination-bullet]:!m-0 [&_.swiper-pagination-bullet]:!h-2.5 [&_.swiper-pagination-bullet]:!w-2.5 [&_.swiper-pagination-bullet]:!rounded-full [&_.swiper-pagination-bullet]:!bg-white/55 [&_.swiper-pagination-bullet]:!opacity-100 [&_.swiper-pagination-bullet-active]:!w-8 [&_.swiper-pagination-bullet-active]:!bg-white" />
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                aria-label="Previous service"
+                className={`ourservices-prev grid h-14 w-14 place-items-center rounded-full border border-white/65 text-white transition ${
+                  sliderState.isBeginning
+                    ? "cursor-not-allowed opacity-40"
+                    : "opacity-100 hover:border-white hover:bg-white/10"
+                }`}
+              >
+                <FiArrowLeft size={24} />
+              </button>
+              <button
+                type="button"
+                aria-label="Next service"
+                className={`ourservices-next grid h-14 w-14 place-items-center rounded-full border border-white/65 text-white transition ${
+                  sliderState.isEnd
+                    ? "cursor-not-allowed opacity-40"
+                    : "opacity-100 hover:border-white hover:bg-white/10"
+                }`}
+              >
+                <FiArrowRight size={24} />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -178,3 +207,4 @@ function OurServices() {
 
 
 export default OurServices
+

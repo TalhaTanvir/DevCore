@@ -39,10 +39,10 @@ function Testimonials() {
         <div className="relative">
           <h2 className="max-w-xl text-4xl uppercase leading-[0.92] tracking-[-0.035em] md:text-6xl lg:text-7xl xl:text-8xl">
             <span className="block font-light text-white/75">Customer</span>
-            <span className="block font-light" style={{ fontFamily: 'Times New Roman, serif' }}>
+            <span className="block font-light">
               Reviews About
             </span>
-            <span className="block font-light" style={{ fontFamily: 'Times New Roman, serif' }}>
+            <span className="block font-light">
               Our Work
             </span>
           </h2>

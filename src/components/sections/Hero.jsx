@@ -127,7 +127,7 @@ export default function HeroSection() {
               className={cn(
                 'inline-flex items-center px-8 py-5 text-lg font-medium rounded-2xl',
                 'border border-slate-700/70 text-slate-200',
-                'hover:bg-slate-800/40 hover:border-slate-600/80',
+                'hover:bg-[#272727] hover:border-slate-600/80',
                 'transition-all duration-300'
               )}
             >
