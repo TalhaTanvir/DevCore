@@ -61,9 +61,45 @@ export default function HeroSection() {
   const words = ['Websites', 'Brands', 'Experiences', 'Solutions', 'Growth'];
 
   const rotatingText = useRotatingText(words, 70, 40, 2000);
+  const [particles] = useState(() =>
+    Array.from({ length: 42 }, (_, index) => ({
+      id: index,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      size: 2 + Math.random() * 4,
+      duration: 8 + Math.random() * 10,
+      delay: Math.random() * 5,
+    }))
+  );
 
   return (
     <section className="relative isolate min-h-[100svh] flex items-center justify-center overflow-hidden bg-[var(--bg-dark)] text-white">
+      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+        {particles.map((particle) => (
+          <motion.span
+            key={particle.id}
+            className="absolute rounded-full bg-white/45"
+            style={{
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
+              width: particle.size,
+              height: particle.size,
+            }}
+            animate={{
+              y: [0, -35, 0],
+              x: [0, 10, 0],
+              opacity: [0.12, 0.6, 0.12],
+              scale: [1, 1.4, 1],
+            }}
+            transition={{
+              duration: particle.duration,
+              delay: particle.delay,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+      </div>
       <div className="relative z-10 w-full max-w-7xl px-5 sm:px-8 lg:px-12 py-20 md:py-32">
         <div className="text-center space-y-8 md:space-y-12">
           {/* Headline */}

@@ -1,17 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FiArrowRight } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 import { z } from 'zod'
 
 const interestTags = [
-  'AI Solutions',
-  'Product Design',
-  'UX/UI Design',
-  'Website Development',
-  'Mobile App Development',
-  'Dashboard',
-  'CMS Development',
-  'Custom Solutions',
+  'Full Stack Development',
+  'Front End Development',
+  'Redesign Website',
+  'Bug Fix',
+  'Maintenance',
+  'Add Section',
+  'Performance Optimization',
 ]
 
 const contactSchema = z.object({
@@ -31,6 +31,8 @@ const contactSchema = z.object({
 })
 
 function ContactUs() {
+  const [selectedInterests, setSelectedInterests] = useState([])
+
   const {
     register,
     handleSubmit,
@@ -52,6 +54,12 @@ function ContactUs() {
 
   const onSubmit = () => {}
 
+  const toggleInterest = (tag) => {
+    setSelectedInterests((prev) =>
+      prev.includes(tag) ? prev.filter((interest) => interest !== tag) : [...prev, tag]
+    )
+  }
+
   return (
     <section
       id="contact-us"
@@ -65,8 +73,8 @@ function ContactUs() {
             Hey{' '}
             <span className="inline-block border-b-[4px] border-[#f18f3a] pb-[1px] leading-none text-white">Ya&apos;ll!</span>
           </p>
-          <h2 className="mt-2 text-4xl font-medium leading-[1.06] tracking-[-0.03em] md:text-6xl">
-            What Are We Shaping Today?
+          <h2 className="mt-2 text-3xl font-semibold leading-[1.08] tracking-[-0.025em] md:text-5xl lg:text-6xl">
+            End-to-End Support for Your Next Project
           </h2>
         </div>
 
@@ -76,23 +84,24 @@ function ContactUs() {
           </div>
 
           <div className="mt-6 flex max-w-5xl flex-wrap gap-3">
-            {interestTags.map((tag, index) => (
-              <span
+            {interestTags.map((tag) => (
+              <button
                 key={tag}
-                className={`rounded-full border px-4 py-[7px] text-sm leading-none tracking-[-0.01em] md:text-base ${
-                  index === interestTags.length - 1
-                    ? 'border-[#8e6dff] text-[#1b1f2d]'
-                    : 'border-[#c7cbd5] text-[#1b1f2d]'
+                type="button"
+                onClick={() => toggleInterest(tag)}
+                aria-pressed={selectedInterests.includes(tag)}
+                className={`rounded-full border px-4 py-[7px] text-sm leading-none tracking-[-0.01em] text-[#1b1f2d] transition-colors md:text-base ${
+                  selectedInterests.includes(tag) ? 'border-[#ff5555]' : 'border-[#c7cbd5]'
                 }`}
               >
                 {tag}
-              </span>
+              </button>
             ))}
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="mt-12 grid gap-8 md:grid-cols-[1.45fr_0.95fr] md:gap-12">
-              <div className="space-y-8">
+              <div className="space-y-8 md:col-span-2">
                 <label className="block">
                   <span className="sr-only">Name</span>
                   <input
@@ -157,19 +166,17 @@ function ContactUs() {
                 {errors.budget && <p className="-mt-6 text-sm text-[#cf3f5f]">{errors.budget.message}</p>}
               </div>
 
-              <div className="flex flex-col justify-between md:pb-1">
-                <div className="mt-12 flex items-center gap-3 md:justify-start">
-                  <button
-                    type="submit"
-                    className="group relative inline-flex h-[58px] items-center gap-3 overflow-hidden rounded-[18px] border border-[#111322] bg-[#0f1324] px-6 text-base font-semibold tracking-[-0.01em] text-white transition duration-300 hover:-translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d54f5]/40 md:text-lg"
-                  >
-                    <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_85%_at_0%_0%,rgba(76,118,255,0.25)_0%,rgba(15,19,36,0)_62%)]" />
-                    <span className="relative">Submit Request</span>
-                    <span className="relative inline-flex items-center justify-center text-xl text-white transition-transform duration-200 group-hover:translate-x-1">
-                      <FiArrowRight />
-                    </span>
-                  </button>
-                </div>
+              <div className="mt-4 flex items-center gap-3 md:col-span-2 md:mt-6 md:justify-end">
+                <button
+                  type="submit"
+                  className="group relative inline-flex h-[58px] items-center gap-3 overflow-hidden rounded-[18px] border border-[#111322] bg-[#0f1324] px-6 text-base font-semibold tracking-[-0.01em] text-white transition duration-300 hover:-translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d54f5]/40 md:text-lg"
+                >
+                  <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_85%_at_0%_0%,rgba(76,118,255,0.25)_0%,rgba(15,19,36,0)_62%)]" />
+                  <span className="relative">Submit Request</span>
+                  <span className="relative inline-flex items-center justify-center text-xl text-white transition-transform duration-200 group-hover:translate-x-1">
+                    <FiArrowRight />
+                  </span>
+                </button>
               </div>
             </div>
           </form>
