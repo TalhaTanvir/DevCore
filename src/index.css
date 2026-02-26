@@ -3,6 +3,7 @@
 
 :root {
   font-family: 'Poppins', 'Roboto', sans-serif;
+  --bg-white: #ffffff;
   --bg-light: #efefef;
   --bg-dark: #141414;
   font-synthesis: none;

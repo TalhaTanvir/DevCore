@@ -20,7 +20,7 @@ function Projects() {
   }, [activeCategory])
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-white pb-20 text-[#0f172a]">
+    <section className="relative min-h-screen overflow-hidden bg-[var(--bg-white)] pb-20 text-[#0f172a]">
       <div className="w-full rounded-b-[30px] bg-black pt-28 md:rounded-b-[36px] md:pt-32">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-10 md:flex-row md:items-end md:justify-between md:px-10 md:py-12">
           <div className="max-w-3xl">
@@ -104,5 +104,4 @@ function Projects() {
 }
 
 export default Projects
-
 
