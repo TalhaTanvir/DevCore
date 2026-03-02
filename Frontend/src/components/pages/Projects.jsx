@@ -1,23 +1,46 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { FiArrowLeft, FiArrowUpRight } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
-import { projectCards } from '../../data/projects'
+import { projectCards as fallbackProjectCards } from '../../data/projects'
+import { fetchWorkItems } from '../../services/contentApi'
 
 function Projects() {
   const [activeCategory, setActiveCategory] = useState('All')
+  const [projects, setProjects] = useState(fallbackProjectCards)
+
+  useEffect(() => {
+    let isMounted = true
+
+    const fetchProjects = async () => {
+      try {
+        const workItems = await fetchWorkItems()
+        if (isMounted) {
+          setProjects(workItems)
+        }
+      } catch {
+        // Keep fallback static cards when API is unavailable.
+      }
+    }
+
+    fetchProjects()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   const categories = useMemo(() => {
-    const uniqueCategories = [...new Set(projectCards.map((project) => project.category))]
+    const uniqueCategories = [...new Set(projects.map((project) => project.category))]
     return ['All', ...uniqueCategories]
-  }, [])
+  }, [projects])
 
   const filteredProjects = useMemo(() => {
     if (activeCategory === 'All') {
-      return projectCards
+      return projects
     }
 
-    return projectCards.filter((project) => project.category === activeCategory)
-  }, [activeCategory])
+    return projects.filter((project) => project.category === activeCategory)
+  }, [activeCategory, projects])
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-[var(--bg-white)] pb-20 text-[#0f172a]">
@@ -104,4 +127,3 @@ function Projects() {
 }
 
 export default Projects
-

@@ -3,6 +3,7 @@ import { FiArrowRight } from 'react-icons/fi'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { z } from 'zod'
+import { submitContactInquiry } from '../../services/contentApi'
 
 const interestTags = [
   'Full Stack Development',
@@ -32,10 +33,15 @@ const contactSchema = z.object({
 
 function ContactUs() {
   const [selectedInterests, setSelectedInterests] = useState([])
+  const [submissionState, setSubmissionState] = useState({
+    status: 'idle',
+    message: '',
+  })
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(contactSchema),
@@ -52,7 +58,29 @@ function ContactUs() {
     event.target.value = event.target.value.replace(/\D/g, '')
   }
 
-  const onSubmit = () => {}
+  const onSubmit = async (values) => {
+    setSubmissionState({ status: 'submitting', message: '' })
+
+    try {
+      await submitContactInquiry({
+        ...values,
+        budget: Number(values.budget),
+        interests: selectedInterests,
+      })
+
+      reset()
+      setSelectedInterests([])
+      setSubmissionState({
+        status: 'success',
+        message: 'Your request has been submitted successfully.',
+      })
+    } catch (error) {
+      setSubmissionState({
+        status: 'error',
+        message: error?.message || 'Failed to submit request. Please try again.',
+      })
+    }
+  }
 
   const toggleInterest = (tag) => {
     setSelectedInterests((prev) =>
@@ -169,15 +197,24 @@ function ContactUs() {
               <div className="mt-4 flex items-center gap-3 md:col-span-2 md:mt-6 md:justify-end">
                 <button
                   type="submit"
+                  disabled={submissionState.status === 'submitting'}
                   className="group relative inline-flex h-[58px] items-center gap-3 overflow-hidden rounded-[18px] border border-[#111322] bg-[#0f1324] px-6 text-base font-semibold tracking-[-0.01em] text-white transition duration-300 hover:-translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d54f5]/40 md:text-lg"
                 >
                   <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_85%_at_0%_0%,rgba(76,118,255,0.25)_0%,rgba(15,19,36,0)_62%)]" />
-                  <span className="relative">Submit Request</span>
+                  <span className="relative">{submissionState.status === 'submitting' ? 'Submitting...' : 'Submit Request'}</span>
                   <span className="relative inline-flex items-center justify-center text-xl text-white transition-transform duration-200 group-hover:translate-x-1">
                     <FiArrowRight />
                   </span>
                 </button>
               </div>
+
+              {submissionState.status === 'success' ? (
+                <p className="md:col-span-2 text-sm text-emerald-700">{submissionState.message}</p>
+              ) : null}
+
+              {submissionState.status === 'error' ? (
+                <p className="md:col-span-2 text-sm text-[#cf3f5f]">{submissionState.message}</p>
+              ) : null}
             </div>
           </form>
         </div>

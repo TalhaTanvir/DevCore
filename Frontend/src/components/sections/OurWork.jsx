@@ -1,14 +1,38 @@
+import { useEffect, useState } from 'react'
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { projectCards } from '../../data/projects'
+import { projectCards as fallbackProjectCards } from '../../data/projects'
+import { fetchWorkItems } from '../../services/contentApi'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 function OurWork() {
   const navigate = useNavigate()
+  const [projects, setProjects] = useState(fallbackProjectCards)
+
+  useEffect(() => {
+    let isMounted = true
+
+    const fetchProjects = async () => {
+      try {
+        const workItems = await fetchWorkItems()
+        if (isMounted) {
+          setProjects(workItems)
+        }
+      } catch {
+        // Keep fallback static cards when API is unavailable.
+      }
+    }
+
+    fetchProjects()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   return (
     <section
@@ -54,7 +78,7 @@ function OurWork() {
               }}
               className="ourwork-swiper"
             >
-              {projectCards.map((card) => (
+              {projects.map((card) => (
                 <SwiperSlide key={card.key}>
                   <article
                     className="relative h-[390px] w-full overflow-hidden rounded-[28px] bg-cover bg-center md:h-[460px]"

@@ -1,12 +1,13 @@
-import React from "react"
+import { useEffect, useState } from 'react'
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation, Pagination } from "swiper/modules"
+import { fetchServices } from '../../services/contentApi'
 import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
 
-const services = [
+const fallbackServices = [
   {
     title: "Full-Stack Development",
     description:
@@ -101,6 +102,29 @@ function ServiceIllustration({ icon }) {
 }
 
 function OurServices() {
+  const [services, setServices] = useState(fallbackServices)
+
+  useEffect(() => {
+    let isMounted = true
+
+    const loadServices = async () => {
+      try {
+        const serviceItems = await fetchServices()
+        if (isMounted) {
+          setServices(serviceItems)
+        }
+      } catch {
+        // Keep fallback services when API is unavailable.
+      }
+    }
+
+    loadServices()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
   return (
     <section
       id="services"

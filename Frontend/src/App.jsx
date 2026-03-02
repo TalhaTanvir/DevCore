@@ -9,6 +9,7 @@ import Testimonials from './components/sections/Testimonials'
 import Faqs from './components/sections/Faqs'
 import ContactUs from './components/sections/ContactUs'
 import Projects from './components/pages/Projects'
+import AdminPanel from './admin/AdminPanel'
 
 function HomePage() {
   return (
@@ -44,14 +45,30 @@ function ScrollToRouteChange() {
 
 function App() {
   return (
-    <MainLayout>
+    <>
       <ScrollToRouteChange />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/projects" element={<Projects />} />
+        <Route
+          path="/"
+          element={
+            <MainLayout>
+              <HomePage />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/projects"
+          element={
+            <MainLayout>
+              <Projects />
+            </MainLayout>
+          }
+        />
+        <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/admin/projects" element={<Navigate to="/admin" replace />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </MainLayout>
+    </>
   )
 }
 

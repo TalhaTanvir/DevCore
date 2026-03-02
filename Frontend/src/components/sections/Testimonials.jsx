@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react'
 import { A11y, Mousewheel, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { fetchTestimonials } from '../../services/contentApi'
 import 'swiper/css'
 
-const testimonials = [
+const fallbackTestimonials = [
   {
     quote:
       'I recently engaged in a website development project with an outstanding team, and the results were nothing short of exceptional. The team exhibited an exemplary level of professionalism, expertise, and dedication throughout the entire process.',
@@ -30,6 +32,29 @@ const testimonials = [
 ]
 
 function Testimonials() {
+  const [testimonials, setTestimonials] = useState(fallbackTestimonials)
+
+  useEffect(() => {
+    let isMounted = true
+
+    const loadTestimonials = async () => {
+      try {
+        const testimonialItems = await fetchTestimonials()
+        if (isMounted) {
+          setTestimonials(testimonialItems)
+        }
+      } catch {
+        // Keep fallback testimonials when API is unavailable.
+      }
+    }
+
+    loadTestimonials()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
   return (
     <section
       id="testimonials"
@@ -81,8 +106,8 @@ function Testimonials() {
             }}
             className="testimonial-swiper relative z-10"
           >
-            {testimonials.map((item) => (
-              <SwiperSlide key={item.name}>
+            {testimonials.map((item, index) => (
+              <SwiperSlide key={item._id || `${item.name}-${index}`}>
                 <article className="relative overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(140deg,rgba(44,45,50,0.95),rgba(27,28,33,0.96))] p-7 shadow-[0_35px_70px_rgba(0,0,0,0.5)] md:p-10">
                   <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,79,79,0.22),transparent_42%)]" />
                   <span className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-[#ff6464] to-[#b52f2f]" />
