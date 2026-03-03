@@ -57,7 +57,56 @@ const listActiveServices = async () => {
     .lean();
 };
 
+const ensureDatabaseConnected = () => {
+  if (mongoose.connection.readyState !== 1) {
+    const error = new Error("Database is not connected");
+    error.statusCode = 503;
+    throw error;
+  }
+};
+
+const listAllServices = async () => {
+  ensureDatabaseConnected();
+
+  return Service.find({})
+    .sort({ order: 1, createdAt: 1 })
+    .lean();
+};
+
+const getServiceById = async (serviceId) => {
+  ensureDatabaseConnected();
+
+  return Service.findById(serviceId).lean();
+};
+
+const createService = async (payload) => {
+  ensureDatabaseConnected();
+
+  const createdService = await Service.create(payload);
+  return createdService.toObject();
+};
+
+const updateService = async (serviceId, payload) => {
+  ensureDatabaseConnected();
+
+  return Service.findByIdAndUpdate(serviceId, payload, {
+    new: true,
+    runValidators: true,
+  }).lean();
+};
+
+const deleteService = async (serviceId) => {
+  ensureDatabaseConnected();
+
+  return Service.findByIdAndDelete(serviceId).lean();
+};
+
 module.exports = {
   listActiveServices,
+  listAllServices,
+  getServiceById,
+  createService,
+  updateService,
+  deleteService,
   defaultServicesSeed,
 };

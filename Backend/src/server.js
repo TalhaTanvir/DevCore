@@ -1,23 +1,12 @@
 const dotenv = require("dotenv");
-const mongoose = require("mongoose");
 const app = require("./app");
+const { connectDatabase, disconnectDatabase } = require("./config/db");
 
 dotenv.config();
 
 const PORT = Number(process.env.PORT) || 5000;
-const MONGODB_URI = process.env.MONGODB_URI;
 
 let server;
-
-const connectDatabase = async () => {
-  if (!MONGODB_URI) {
-    console.warn("MONGODB_URI is not set. Starting server without database connection.");
-    return;
-  }
-
-  await mongoose.connect(MONGODB_URI);
-  console.log("MongoDB connected");
-};
 
 const startServer = async () => {
   try {
@@ -48,10 +37,7 @@ const shutdown = async (signal) => {
       });
     }
 
-    if (mongoose.connection.readyState !== 0) {
-      await mongoose.connection.close();
-      console.log("MongoDB connection closed");
-    }
+    await disconnectDatabase();
 
     console.log("Shutdown complete");
     process.exit(0);
